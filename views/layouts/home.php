@@ -6,7 +6,5 @@
 
 </div>
 
-<h1>HOME</h1>
-
 
 <?php $this->endContent(); ?>
