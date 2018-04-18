@@ -101,10 +101,18 @@ class UsersController extends Controller
 
         $idlogin = Yii::$app->user->identity->id;
         $model = $this->findModel($idlogin);
+        $model->password = pack("H*",$model->password);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+            Yii::$app->session->setFlash('verified');
+
+        return $this->refresh();
+      } else {
         return $this->render('setting', [
             'model' => $model,
         ]);
+      }
 
     }
 

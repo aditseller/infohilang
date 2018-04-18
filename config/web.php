@@ -50,7 +50,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'login' => 'site/login',
-                'signup' => 'users/signup'
+                'signup' => 'users/signup',
+                'accountsettings' => 'users/setting',
             ],
         ],
         

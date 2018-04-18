@@ -51,7 +51,7 @@ class Users extends \yii\db\ActiveRecord
             [['phone'], 'unique'],
             [['authKey'], 'unique'],
             [['accessToken'], 'unique'],
-            [['verifyCode'],'captcha'],
+            [['verifyCode'],'captcha','skipOnEmpty'=>true, 'on' =>'setting'],
         ];
     }
 
