@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+
 }
 
 .wrap {
@@ -8,11 +9,13 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
+    background-color: #eee;
+}
+.wrap > .container {
+    padding: 20px 15px 20px;
 }
 
-.wrap > .container {
-    padding: 70px 15px 20px;
-}
+
 
 .footer {
     height: 60px;

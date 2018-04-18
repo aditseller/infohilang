@@ -24,6 +24,7 @@ use Yii;
  */
 class Users extends \yii\db\ActiveRecord
 {
+    public $verifyCode;
     /**
      * @inheritdoc
      */
@@ -50,6 +51,7 @@ class Users extends \yii\db\ActiveRecord
             [['phone'], 'unique'],
             [['authKey'], 'unique'],
             [['accessToken'], 'unique'],
+            [['verifyCode'],'captcha'],
         ];
     }
 
@@ -71,6 +73,7 @@ class Users extends \yii\db\ActiveRecord
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
             'verified' => 'Verified',
+            'verifyCode' => 'Are You Human ?',
         ];
     }
 
@@ -80,5 +83,19 @@ class Users extends \yii\db\ActiveRecord
     public function getInfos()
     {
         return $this->hasMany(Info::className(), ['created_by' => 'username']);
+    }
+
+    public function beforeSave($insert) {
+        if(isset($this->password)) {
+            
+            $this->password = bin2hex($this->password);
+            $this->authKey = sha1($this->email);
+            $this->accessToken = sha1($this->id_user);
+            $this->join_date = date('Y-m-d H:i:s');
+            $this->username = strstr($this->email, '@', true);
+            $this->gender = null;
+            
+        }
+            return parent::beforeSave($insert);
     }
 }

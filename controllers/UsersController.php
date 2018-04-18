@@ -62,15 +62,16 @@ class UsersController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionSignup()
     {
+        $this->layout = 'box';
         $model = new Users();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_user]);
         }
 
-        return $this->render('create', [
+        return $this->render('signup', [
             'model' => $model,
         ]);
     }
@@ -93,6 +94,18 @@ class UsersController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    //Profile Setting Module
+    public function actionSetting() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+
+        return $this->render('setting', [
+            'model' => $model,
+        ]);
+
     }
 
     /**

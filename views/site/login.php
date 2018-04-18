@@ -10,8 +10,8 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+
+    <center><img width="30%" src="<?= Yii::$app->homeUrl ?>/public/img/login.png"></center>
 
     
 
@@ -24,21 +24,21 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-        <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+        <div class="col-md-12"> <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?></div>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+       <div class="col-md-12">  <?= $form->field($model, 'password')->passwordInput() ?></div>
 
-        <?= $form->field($model, 'rememberMe')->checkbox([
+       <div class="col-md-12">  <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
+        ]) ?></div>
 
-        <div class="form-group">
+        <div class="form-group"><div class="col-md-12"> 
             <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Login', ['class' => 'btn btn-lg btn-block btn-warning', 'name' => 'login-button']) ?>
             </div>
+        </div>
         </div>
 
     <?php ActiveForm::end(); ?>
 
   
-</div>
