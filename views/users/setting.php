@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\captcha\Captcha;
+
 
 ?>
 <?php if(Yii::$app->session->hasFlash('verified')): ?>
@@ -47,12 +47,30 @@ use yii\captcha\Captcha;
 
 
 <div class="list-group">
-  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span> Change Fullname</a>
-  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> Change Password</a>
-  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Change Email</a>
-  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Change Phone Number</a>
-  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-map-marker"></span> Change Location</a>
-  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Change Gender</a>
+  <a href="<?= Yii::$app->homeUrl ?>users/changefullname" class="list-group-item">
+  	<div style="font-size: 1.3em; font-weight: bold;"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span> Change Fullname</div> 
+  	<div style="font-size: 0.8em; font-weight: bold;"><?= Yii::$app->user->identity->fullname ?></div></a>
+
+  <a href="<?= Yii::$app->homeUrl ?>users/changepassword" class="list-group-item">
+  	<div style="font-size: 1.3em; font-weight: bold;"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> Change Password</div>
+  	<div style="font-size: 0.8em; font-weight: bold;">************</div></a>
+  </a>
+  <a href="<?= Yii::$app->homeUrl ?>users/changeemail" class="list-group-item">
+  	<div style="font-size: 1.3em; font-weight: bold;"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Change Email</div>
+  		<div style="font-size: 0.8em; font-weight: bold;"><?= Yii::$app->user->identity->email ?></div>
+  	</a>
+  <a href="<?= Yii::$app->homeUrl ?>users/changephone" class="list-group-item">
+  		<div style="font-size: 1.3em; font-weight: bold;"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> Change Phone Number</div>
+  		<div style="font-size: 0.8em; font-weight: bold;"><?= Yii::$app->user->identity->phone ?></div>
+  </a>
+  <a href="<?= Yii::$app->homeUrl ?>users/changelocation" class="list-group-item">
+  	<div style="font-size: 1.3em; font-weight: bold;"><span class="glyphicon glyphicon-map-marker"></span> Change Location</div>
+  	<div style="font-size: 0.8em; font-weight: bold;"><?= Yii::$app->user->identity->location ?></div>
+  	</a>
+  <a href="<?= Yii::$app->homeUrl ?>users/changegender" class="list-group-item">
+  	<div style="font-size: 1.3em; font-weight: bold;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Change Gender</div>
+  	<div style="font-size: 0.8em; font-weight: bold;"><?= Yii::$app->user->identity->gender ?></div>
+  	</a>
 </div>
 
 <?php if(Yii::$app->user->identity->verified == 0): ?>

@@ -68,7 +68,7 @@ class UsersController extends Controller
         $model = new Users();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_user]);
+            return $this->redirect(['site/login']);
         }
 
         return $this->render('signup', [
@@ -76,25 +76,7 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Users model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_user]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+   
 
     //Profile Setting Module
     public function actionSetting() {
@@ -110,6 +92,114 @@ class UsersController extends Controller
         return $this->refresh();
       } else {
         return $this->render('setting', [
+            'model' => $model,
+        ]);
+      }
+
+    }
+
+     //Profile Change Fullname
+    public function actionChangefullname() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+        $model->password = pack("H*",$model->password);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        return $this->redirect(['setting']);
+      } else {
+        return $this->render('changefullname', [
+            'model' => $model,
+        ]);
+      }
+
+    }
+
+    //Profile Change Email
+    public function actionChangeemail() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+        $model->password = pack("H*",$model->password);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        return $this->redirect(['setting']);
+      } else {
+        return $this->render('changeemail', [
+            'model' => $model,
+        ]);
+      }
+
+    }
+
+    //Profile Change Phone
+    public function actionChangephone() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+        $model->password = pack("H*",$model->password);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        return $this->redirect(['setting']);
+      } else {
+        return $this->render('changephone', [
+            'model' => $model,
+        ]);
+      }
+
+    }
+
+     //Profile Change Location
+    public function actionChangelocation() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+        $model->password = pack("H*",$model->password);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        return $this->redirect(['setting']);
+      } else {
+        return $this->render('changelocation', [
+            'model' => $model,
+        ]);
+      }
+
+    }
+
+      //Profile Change Gender
+    public function actionChangegender() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+        $model->password = pack("H*",$model->password);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        return $this->redirect(['setting']);
+      } else {
+        return $this->render('changegender', [
+            'model' => $model,
+        ]);
+      }
+
+    }
+
+
+    //Profile Change Password
+    public function actionChangepassword() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        return $this->redirect(['setting']);
+      } else {
+        return $this->render('changepassword', [
             'model' => $model,
         ]);
       }

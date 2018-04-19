@@ -47,11 +47,12 @@ class Users extends \yii\db\ActiveRecord
             [['phone'], 'string', 'max' => 20],
             [['authKey', 'accessToken'], 'string', 'max' => 700],
             [['email'], 'unique'],
+            [['email'],'email'],
             [['username'], 'unique'],
             [['phone'], 'unique'],
             [['authKey'], 'unique'],
             [['accessToken'], 'unique'],
-            [['verifyCode'],'captcha','skipOnEmpty'=>true, 'on' =>'setting'],
+            [['verifyCode'],'captcha','skipOnEmpty'=>true, 'on' =>'setting,changegender'],
         ];
     }
 
@@ -93,7 +94,7 @@ class Users extends \yii\db\ActiveRecord
             $this->accessToken = sha1($this->id_user);
             $this->join_date = date('Y-m-d H:i:s');
             $this->username = strstr($this->email, '@', true);
-            $this->gender = null;
+            
             
         }
             return parent::beforeSave($insert);
