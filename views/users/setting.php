@@ -14,7 +14,9 @@ use yii\widgets\ActiveForm;
 
 	<table>
 		<tr>
-			<td width="30%" height="100%"><img width="100%" src="<?= Yii::$app->homeUrl ?>/public/img/nopic.png"></td>	
+			<td width="30%" height="100%">
+        <a href="<?= Yii::$app->homeUrl ?>users/changeprofilepicture"><img width="100%" class="img-circle" src="<?= Yii::$app->homeUrl ?>/public/img/nopic.png"></a>
+      </td>	
 			<td>
 			<div style="font-size: 2.0em; font-weight: bold;">
 				<?= Yii::$app->user->identity->fullname ?> <?php if(Yii::$app->user->identity->verified == 1) { ?>

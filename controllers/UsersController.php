@@ -188,6 +188,24 @@ class UsersController extends Controller
 
     }
 
+     //Profile Change Profile Picture
+    public function actionChangeprofilepicture() {
+
+        $idlogin = Yii::$app->user->identity->id;
+        $model = $this->findModel($idlogin);
+        $model->password = pack("H*",$model->password);
+           
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        return $this->redirect(['setting']);
+      } else {
+        return $this->render('changeprofilepicture', [
+            'model' => $model,
+        ]);
+      }
+
+    }
+
 
     //Profile Change Password
     public function actionChangepassword() {
