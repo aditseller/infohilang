@@ -1,8 +1,9 @@
 <?php
-
+header("Cache-Control: no-cache, must-revalidate");
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+$urlimg = Yii::$app->homeUrl."/public/uploads/product/".sha1(Yii::$app->user->identity->id).'jpg';
 
 ?>
 <?php if(Yii::$app->session->hasFlash('verified')): ?>
@@ -15,7 +16,14 @@ use yii\widgets\ActiveForm;
 	<table>
 		<tr>
 			<td width="30%" height="100%">
+        <?php if(file_exists($urlimg)) { ?>
+        <a href="<?= Yii::$app->homeUrl ?>users/changeprofilepicture"><img width="100%" class="img-circle" src="<?= Yii::$app->homeUrl ?>/public/uploads/profile/<?= sha1(Yii::$app->user->identity->id) ?>.jpg"></a>
+
+        <?php } else if(file_exists($urlimg)) { ?>
+
         <a href="<?= Yii::$app->homeUrl ?>users/changeprofilepicture"><img width="100%" class="img-circle" src="<?= Yii::$app->homeUrl ?>/public/img/nopic.png"></a>
+
+        <?php } ?>
       </td>	
 			<td>
 			<div style="font-size: 2.0em; font-weight: bold;">
@@ -87,3 +95,5 @@ use yii\widgets\ActiveForm;
 
 <?php else: ?>
 <?php endif; ?>
+
+

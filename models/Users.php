@@ -25,6 +25,7 @@ use Yii;
 class Users extends \yii\db\ActiveRecord
 {
     public $verifyCode;
+    public $image;
     /**
      * @inheritdoc
      */
@@ -53,6 +54,7 @@ class Users extends \yii\db\ActiveRecord
             [['authKey'], 'unique'],
             [['accessToken'], 'unique'],
             [['verifyCode'],'captcha','skipOnEmpty'=>true, 'on' =>'setting,changegender'],
+            [['image'], 'image','extensions'=>'jpg, gif, png','maxSize' => 500000, ],
         ];
     }
 

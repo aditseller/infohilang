@@ -8,6 +8,8 @@ use app\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -29,20 +31,7 @@ class UsersController extends Controller
         ];
     }
 
-    /**
-     * Lists all Users models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new UsersSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+ 
 
     /**
      * Displays a single Users model.
@@ -193,10 +182,13 @@ class UsersController extends Controller
 
         $idlogin = Yii::$app->user->identity->id;
         $model = $this->findModel($idlogin);
-        $model->password = pack("H*",$model->password);
-           
-          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        
+        if ($model->load(Yii::$app->request->post())) {
 
+          $model->image = UploadedFile::getInstance($model,'image');
+          $model->image->saveAs('public/uploads/profile/'.sha1(Yii::$app->user->identity->id).'.jpg');
+            
+           
         return $this->redirect(['setting']);
       } else {
         return $this->render('changeprofilepicture', [
@@ -205,6 +197,7 @@ class UsersController extends Controller
       }
 
     }
+  
 
 
     //Profile Change Password
