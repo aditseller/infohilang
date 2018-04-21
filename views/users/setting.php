@@ -1,9 +1,19 @@
+
+<!-- Javascript For Clear Cache Profile Picture Showing -->
+<script>
+  document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+</script>
+
+
 <?php
-header("Cache-Control: no-cache, must-revalidate");
+$this->title = 'Account Setting @'.$model->username;
+
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$urlimg = Yii::$app->homeUrl."/public/uploads/product/".sha1(Yii::$app->user->identity->id).'jpg';
+$urlimg = Yii::$app->params['rootUrl']."public/uploads/profile/".sha1(Yii::$app->user->identity->id).'.jpg';
+$header_response_urlimg = get_headers($urlimg, 1);
 
 ?>
 <?php if(Yii::$app->session->hasFlash('verified')): ?>
@@ -16,15 +26,18 @@ $urlimg = Yii::$app->homeUrl."/public/uploads/product/".sha1(Yii::$app->user->id
 	<table>
 		<tr>
 			<td width="30%" height="100%">
-        <?php if(file_exists($urlimg)) { ?>
-        <a href="<?= Yii::$app->homeUrl ?>users/changeprofilepicture"><img width="100%" class="img-circle" src="<?= Yii::$app->homeUrl ?>/public/uploads/profile/<?= sha1(Yii::$app->user->identity->id) ?>.jpg"></a>
-
-        <?php } else if(file_exists($urlimg)) { ?>
-
+        <?php if(strpos($header_response_urlimg[0],"404") !== false) { ?>
+        <!-- No Picture -->
         <a href="<?= Yii::$app->homeUrl ?>users/changeprofilepicture"><img width="100%" class="img-circle" src="<?= Yii::$app->homeUrl ?>/public/img/nopic.png"></a>
+
+        <?php } else { ?>
+
+        <!-- Picture Profile Available -->
+        <a href="<?= Yii::$app->homeUrl ?>users/changeprofilepicture"><img width="100%" class="img-circle" src="<?= Yii::$app->homeUrl ?>/public/uploads/profile/<?= sha1(Yii::$app->user->identity->id) ?>.jpg"></a>
 
         <?php } ?>
       </td>	
+      <td style="width: 3%;"></td>
 			<td>
 			<div style="font-size: 2.0em; font-weight: bold;">
 				<?= Yii::$app->user->identity->fullname ?> <?php if(Yii::$app->user->identity->verified == 1) { ?>
@@ -48,10 +61,6 @@ $urlimg = Yii::$app->homeUrl."/public/uploads/product/".sha1(Yii::$app->user->id
 			</td>
 
 		</tr>
-	
-
-
-	
 
 </table>
 

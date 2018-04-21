@@ -54,7 +54,7 @@ class Users extends \yii\db\ActiveRecord
             [['authKey'], 'unique'],
             [['accessToken'], 'unique'],
             [['verifyCode'],'captcha','skipOnEmpty'=>true, 'on' =>'setting,changegender'],
-            [['image'], 'image','extensions'=>'jpg, gif, png','maxSize' => 500000, ],
+            [['image'], 'image','extensions'=>'jpg,png','maxSize' => 5000000, ],
         ];
     }
 
