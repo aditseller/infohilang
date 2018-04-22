@@ -5,8 +5,17 @@ use yii\helpers\Html;
 
 ?>
 
-<h3><center>Silahkan Pilih Info</center></h3>
+<h3><center>Silahkan Pilih Opsi</center></h3>
 
-<?= Html::a('Kehilangan',['info/createlostinfo'],['class'=>'btn btn-lg btn-block btn-danger']) ?>
+<div class="col-md-12"><?= Html::a('Kehilangan',['info/createlostinfo'],['class'=>'btn btn-lg btn-block btn-danger']) ?></div>
 
-<?= Html::a('Ditemukan',['info/createfoundinfo'],['class'=>'btn btn-lg btn-block btn-warning']) ?>
+<div class="col-md-12"></div>
+<div class="col-md-12"></div>
+<div class="col-md-12"></div>
+<div class="col-md-12"></div>
+<div class="col-md-12"></div>
+<div class="col-md-12"></div>
+<div class="col-md-12"></div>
+<div class="col-md-12"></div>
+
+<div class="col-md-12"><?= Html::a('Ditemukan',['info/createfoundinfo'],['class'=>'btn btn-lg btn-block btn-warning']) ?></div>

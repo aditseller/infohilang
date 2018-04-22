@@ -19,7 +19,7 @@ class InfoSearch extends Info
     {
         return [
             [['id_info'], 'integer'],
-            [['type_info', 'category', 'name', 'location', 'since', 'contact_person', 'contact_person_name', 'created_at', 'created_by', 'url'], 'safe'],
+            [['type_info', 'category', 'name', 'location', 'since', 'description', 'contact_person', 'contact_person_name', 'created_at', 'created_by', 'url','status'], 'safe'],
         ];
     }
 
@@ -68,9 +68,11 @@ class InfoSearch extends Info
             ->andFilterWhere(['like', 'category', $this->category])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'location', $this->location])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'contact_person', $this->contact_person])
             ->andFilterWhere(['like', 'contact_person_name', $this->contact_person_name])
             ->andFilterWhere(['like', 'created_by', $this->created_by])
+            ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;

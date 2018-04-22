@@ -24,6 +24,10 @@ use Yii;
  */
 class Info extends \yii\db\ActiveRecord
 {
+    public $image;
+    public $image2;
+    public $image3;
+
     /**
      * @inheritdoc
      */
@@ -38,8 +42,8 @@ class Info extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_info', 'category', 'name', 'location', 'since', 'contact_person', 'contact_person_name'], 'required'],
-            [['type_info'], 'string'],
+            [['category', 'name', 'location', 'since', 'contact_person', 'contact_person_name'], 'required'],
+            [['type_info','status'], 'string'],
             [['since', 'created_at'], 'safe'],
             [['category', 'name', 'location', 'contact_person_name', 'created_by'], 'string', 'max' => 100],
             [['contact_person'], 'string', 'max' => 20],
@@ -63,11 +67,15 @@ class Info extends \yii\db\ActiveRecord
             'name' => 'Name',
             'location' => 'Location',
             'since' => 'Since',
+            'description' => 'Description',
             'contact_person' => 'Contact Person',
             'contact_person_name' => 'Contact Person Name',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'url' => 'Url',
+            'image' => 'Photo 1 (Optional)',
+            'image2' => 'Photo 2 (Optional)',
+            'image3' => 'Photo 3 (Optional)',
         ];
     }
 
@@ -85,5 +93,17 @@ class Info extends \yii\db\ActiveRecord
     public function getCreatedBy()
     {
         return $this->hasOne(Users::className(), ['username' => 'created_by']);
+    }
+
+    public function beforeSave($insert) {
+           
+            
+            $entities = array('?',' ');
+            $replacements = array('','-');
+            $this->url = str_replace($entities, $replacements, $this->name).'-'.$this->id_info;
+            
+            
+        
+            return parent::beforeSave($insert);
     }
 }

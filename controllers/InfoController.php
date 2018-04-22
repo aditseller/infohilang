@@ -8,6 +8,8 @@ use app\models\InfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
 
 /**
  * InfoController implements the CRUD actions for Info model.
@@ -45,7 +47,7 @@ class InfoController extends Controller
     }
 
     //Choice
-    public function actionChoice() {
+    public function actionCreate() {
 
         return $this->render('choice');
     }
@@ -68,15 +70,63 @@ class InfoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreatelostinfo()
     {
         $model = new Info();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_info]);
+        $model->created_at = date('Y-m-d H:i:s');
+        $model->created_by = Yii::$app->user->identity->username;
+        $model->status = 'published';
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->image = UploadedFile::getInstance($model,'image');
+            $model->image2 = UploadedFile::getInstance($model,'image2');
+            $model->image3 = UploadedFile::getInstance($model,'image3');
+
+
+            if($model->save()) {
+
+            if(!empty($model->image)) {
+            
+
+             $model->image->saveAs('public/uploads/info/'.sha1($model->id_info).'_1.jpg');
+
+
+              //Create Thumbnail Image and Resize
+            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_1.jpg',500,500)->save('public/uploads/info/'.sha1($model->id_info).'_1.jpg');
+
+            }
+
+               if(!empty($model->image2)) {
+            
+
+             $model->image2->saveAs('public/uploads/info/'.sha1($model->id_info).'_2.jpg');
+
+
+              //Create Thumbnail Image and Resize
+            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_2.jpg',500,500)->save('public/uploads/info/'.sha1($model->id_info).'_2.jpg');
+
+            }
+
+               if(!empty($model->image3)) {
+            
+
+             $model->image3->saveAs('public/uploads/info/'.sha1($model->id_info).'_3.jpg');
+
+
+              //Create Thumbnail Image and Resize
+            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_3.jpg',500,500)->save('public/uploads/info/'.sha1($model->id_info).'_3.jpg');
+
+            }
+
         }
 
-        return $this->render('create', [
+
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('createlostinfo', [
             'model' => $model,
         ]);
     }

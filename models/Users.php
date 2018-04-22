@@ -94,7 +94,6 @@ class Users extends \yii\db\ActiveRecord
             $this->password = bin2hex($this->password);
             $this->authKey = sha1($this->email);
             $this->accessToken = sha1($this->id_user);
-            $this->join_date = date('Y-m-d H:i:s');
             $this->username = strstr($this->email, '@', true);
             
             
