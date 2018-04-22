@@ -44,6 +44,12 @@ class InfoController extends Controller
         ]);
     }
 
+    //Choice
+    public function actionChoice() {
+
+        return $this->render('choice');
+    }
+
     /**
      * Displays a single Info model.
      * @param integer $id
