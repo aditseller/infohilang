@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 
  <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-   <div id="image_preview" class="thumbnail"><img id="previewing" src="<?= Yii::$app->homeUrl ?>public/img/noimg.svg" /></div>
+   <div id="image_preview" class="thumbnail"><img id="previewing" src="" /></div>
     <?= $form->field($model, 'image')->fileInput(['required' => true,'id'=> 'file']) ?>
 
 <div class="form-group">
