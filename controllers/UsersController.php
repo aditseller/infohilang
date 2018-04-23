@@ -79,7 +79,7 @@ class UsersController extends Controller
         $this->layout = 'box';
         $model = new Users();
 
-        $this->join_date = date('Y-m-d H:i:s');
+        $model->join_date = date('Y-m-d H:i:s');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['site/login']);
