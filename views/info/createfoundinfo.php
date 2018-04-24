@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
    ])->textInput(['placeholder'=>'Tanggal Kejadian']) ?></div>
 
-  <div class="col-md-12"> <?= $form->field($model, 'description')->textArea(['rows'=>8,'placeholder'=>'Ceritakan Deskripsi atau Kronologis terkait kehilangan. Kosongkan jika tidak ada...']) ?></div>
+  <div class="col-md-12"> <?= $form->field($model, 'description')->textArea(['rows'=>8,'placeholder'=>'Ceritakan Deskripsi atau Kronologis terkait ditemukan. Kosongkan jika tidak ada...']) ?></div>
 
 
 

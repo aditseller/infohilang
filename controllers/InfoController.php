@@ -10,12 +10,14 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * InfoController implements the CRUD actions for Info model.
  */
 class InfoController extends Controller
 {
+	
     /**
      * @inheritdoc
      */
@@ -28,15 +30,35 @@ class InfoController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+			
+			 //Sluggable
+           [
+            'class' => SluggableBehavior::className(),
+            'attribute' => 'url',
+            'slugAttribute' => 'slug',
+          ],
         ];
     }
 
+	   //Sluggable function
+  public function actionSlug($slug) {
+	
+    $model = Info::find()->where(['url'=>$slug])->one();
+      if (!is_null($model)) {
+        return $this->render('view', [
+           'model' => $model,
+       ]);
+      } else {
+     return $this->render('404',['exception'=>Yii::$app->errorHandler->exception]);
+   }
+ }
     /**
      * Lists all Info models.
      * @return mixed
      */
     public function actionIndex()
     {
+		$this->layout = 'home';
         $searchModel = new InfoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,7 +70,7 @@ class InfoController extends Controller
 
     //Choice
     public function actionCreate() {
-
+		
         return $this->render('choice');
     }
 
@@ -60,6 +82,7 @@ class InfoController extends Controller
      */
     public function actionView($id)
     {
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -74,14 +97,14 @@ class InfoController extends Controller
         $model->created_by = Yii::$app->user->identity->username;
         $model->status = 'published';
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $model->image = UploadedFile::getInstance($model,'image');
             $model->image2 = UploadedFile::getInstance($model,'image2');
             $model->image3 = UploadedFile::getInstance($model,'image3');
 
 
-            if($model->save()) {
+            
 
             if(!empty($model->image)) {
             
@@ -116,7 +139,7 @@ class InfoController extends Controller
 
             }
 
-        }
+        
 
 
             return $this->redirect(['index']);
@@ -152,7 +175,7 @@ class InfoController extends Controller
 
 
               //Create Thumbnail Image and Resize
-            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_1.jpg',500,500)->save('public/uploads/info/'.sha1($model->id_info).'_1.jpg');
+            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_1.jpg',400,300)->save('public/uploads/info/'.sha1($model->id_info).'_1.jpg');
 
             }
 
@@ -163,7 +186,7 @@ class InfoController extends Controller
 
 
               //Create Thumbnail Image and Resize
-            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_2.jpg',500,500)->save('public/uploads/info/'.sha1($model->id_info).'_2.jpg');
+            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_2.jpg',400,300)->save('public/uploads/info/'.sha1($model->id_info).'_2.jpg');
 
             }
 
@@ -174,7 +197,7 @@ class InfoController extends Controller
 
 
               //Create Thumbnail Image and Resize
-            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_3.jpg',500,500)->save('public/uploads/info/'.sha1($model->id_info).'_3.jpg');
+            Image::thumbnail('public/uploads/info/'.sha1($model->id_info).'_3.jpg',400,300)->save('public/uploads/info/'.sha1($model->id_info).'_3.jpg');
 
             }
 

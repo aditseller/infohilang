@@ -1,51 +1,52 @@
 <?php
+use yii\widgets\ListView;
+use yii\data\ActiveDataProvider;
+
 
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->name;
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <div class="box effect6">
-            fkdjfkdjf
-        </div>
-    </div>
+
+   <hr/>
 
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+          
+            
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+				<?php 
+			
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+$dataProvider = new ActiveDataProvider([
+    'query' => app\models\Info::find()->where(['like','status', 'published']),
+	'sort'=> ['defaultOrder' => ['created_at'=>SORT_DESC]],
+    'pagination' => [
+        'pageSize' => 7,
+    ],
+]);
+			echo ListView::widget([
+     'dataProvider' => $dataProvider,
+     'itemOptions' => ['class' => 'item'],
+     'itemView' => 'posts_view',
+	 'summary'=>'',
+     'pager' => [
+	 'class' => \kop\y2sp\ScrollPager::className(),
+	 'triggerOffset' => 5,
+	 'triggerTemplate' => '<center><a style="cursor: pointer" class="btn btn-block btn-default">Load More....</a></center>',
+	 'noneLeftText'=>'Kamu Sudah Up to Date, Guys!'
+	 ],
+	 
+     
+	]);
+			
+			?>   
+     
+            
+            
         </div>
 
     </div>
-</div>
+

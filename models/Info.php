@@ -100,7 +100,7 @@ class Info extends \yii\db\ActiveRecord
             
             $entities = array('?',' ');
             $replacements = array('','-');
-            $this->url = str_replace($entities, $replacements, $this->name).'-'.$this->id_info;
+            $this->url = str_replace($entities, $replacements, $this->name).'-'.$this->type_info;
             
             
         

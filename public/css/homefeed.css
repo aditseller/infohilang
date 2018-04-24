@@ -1,0 +1,26 @@
+.titlehomefeed {
+	
+	font-size:1.3em; 
+	font-weight:bold;
+	margin-top:5px;
+	
+}
+.teaserhomefeed {
+	font-size:0.8em; 
+	color:#333;
+}
+.thumbhomefeed {
+	
+	width:100%; 
+	height:100%;
+	
+	
+}
+
+.boxhomefeed {
+	background-color:#fff;
+}
+
+.spacerhomefeed {
+	height:10px;
+}

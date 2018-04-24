@@ -54,8 +54,10 @@ $config = [
                 'signup' => 'users/signup',
                 'accountsettings' => 'users/setting',
                 'users/<id:\d+>' => 'users/view',
+                'info/<id:\d+>' => 'info/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 'u/<slug>' => 'users/slug',
+                'information/<slug>' => 'info/slug',
             ],
         ],
         

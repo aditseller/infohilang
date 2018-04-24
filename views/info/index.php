@@ -7,37 +7,33 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\InfoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Infos';
+$this->title = 'Information';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<hr/>
 <div class="info-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Info', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+     <?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'showHeader' => false,
+    'columns' => [
+        array(
+            'format' => 'raw',
+            'value'=>function ($data) {
+                return Html::a(
+                '<div class="row" >'
+                .'<div class="col-md-11"><span class="glyphicon glyphicon-calendar"></span> '.date('j F Y',strtotime($data->created_at))
+				.'<h3>'.$data->name.'</h3>'
+                .'<b>Tanggal Kejadian : '.date('j F Y',strtotime($data->since)).'</b>'
+                .' <span class="glyphicon glyphicon-map-marker"></span> '.$data->location
+                .'</div></div>',
+                        ['information/'.$data->url]);
+            },
+        ),
+    ],
+]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id_info',
-            'type_info',
-            'category',
-            'name',
-            'location',
-            //'since',
-            //'contact_person',
-            //'contact_person_name',
-            //'created_at',
-            //'created_by',
-            //'url:url',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 </div>
