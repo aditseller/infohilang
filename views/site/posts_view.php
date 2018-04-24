@@ -6,8 +6,8 @@ $header_response_imginfo = get_headers($imginfo, 1);
 ?>
 
 
-
-  
+	<div class="postinghomefeed"><?= date('j F Y H:i',strtotime($model->created_at)) ?></div>
+  			
             <div class="col-lg-4 boxhomefeed">
 				<p class="spacerhomefeed"></p>
 				<a href="<?= Yii::$app->request->baseUrl; ?>/information/<?= $model->url; ?>">
@@ -17,7 +17,7 @@ $header_response_imginfo = get_headers($imginfo, 1);
 				<?php } else { ?>
 				<img class="thumbhomefeed" src="<?= Yii::$app->params['rootUrl'] ?>public/uploads/info/<?= sha1($model->id_info) ?>_1.jpg">
 				<?php } ?>
-                <p class="titlehomefeed">
+                <div class="titlehomefeed">
 				<?php if($model->type_info == 'lost') { ?>
 				Telah Hilang : 
 				
@@ -27,8 +27,10 @@ $header_response_imginfo = get_headers($imginfo, 1);
 				<?php } ?> 				
 				
 				<?= $model->name ?>
-				</p>
+
+				</div>
 				  </a>
+				
           
                 <p class="spacerhomefeed"></p>
             </div>

@@ -24,3 +24,13 @@
 .spacerhomefeed {
 	height:10px;
 }
+.postinghomefeed {
+	background: #123456;
+	color:#ffffff;
+	font-style: italic;
+	height: 25px;
+	font-size:1.3em;
+}
+.postinghomefeed a {
+	color:#ffffff;
+}

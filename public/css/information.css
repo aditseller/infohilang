@@ -1,0 +1,37 @@
+.descriptiontext {
+	font-size: 1.3em;
+	font-family: Tahoma;
+	text-align: justify-all;
+}
+
+.sincetext {
+	font-size: 1.3em;
+	font-family: Tahoma;
+	text-align: center;
+	font-weight: bold;
+}
+
+.locationtext {
+	font-size: 1.3em;
+	font-family: Tahoma;
+	text-align: center;
+	
+}
+
+.cptext {
+	font-size: 1.3em;
+	font-family: Tahoma;
+	text-align: center;
+	font-weight: bold;
+}
+.postingtext {
+	background: #123456;
+	color:#ffffff;
+	font-style: italic;
+	height: 25px;
+	padding: 0 1% 0;
+	
+}
+.postingtext a {
+	color:#ffffff;
+}
