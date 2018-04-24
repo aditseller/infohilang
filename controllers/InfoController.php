@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use yii\behaviors\SluggableBehavior;
+use yii\filters\AccessControl;
 
 /**
  * InfoController implements the CRUD actions for Info model.
@@ -30,6 +31,19 @@ class InfoController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+
+            //access_control
+               'access' => [
+                      'class' => AccessControl::className(),
+                           'only' => ['create','createlostinfo','createfoundinfo'],
+                                'rules' => [
+                                         [
+                                                   'allow' => true,
+                                                           'actions' => ['create','createlostinfo','createfoundinfo'],
+                                                                   'roles' => ['@'],
+                                                        ],
+                                                      ],
+                                                    ],
 			
 			 //Sluggable
            [
@@ -211,25 +225,7 @@ class InfoController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Info model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_info]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+   
 
     /**
      * Deletes an existing Info model.
