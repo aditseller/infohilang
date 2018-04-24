@@ -44,7 +44,7 @@ class Info extends \yii\db\ActiveRecord
         return [
             [['category', 'name', 'location', 'since', 'contact_person', 'contact_person_name'], 'required'],
             [['type_info','status'], 'string'],
-            [['since', 'created_at'], 'safe'],
+            [['since', 'created_at','description'], 'safe'],
             [['category', 'name', 'location', 'contact_person_name', 'created_by'], 'string', 'max' => 100],
             [['contact_person'], 'string', 'max' => 20],
             [['url'], 'string', 'max' => 500],

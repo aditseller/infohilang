@@ -159,14 +159,13 @@ class InfoController extends Controller
         $model->created_by = Yii::$app->user->identity->username;
         $model->status = 'published';
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $model->image = UploadedFile::getInstance($model,'image');
             $model->image2 = UploadedFile::getInstance($model,'image2');
             $model->image3 = UploadedFile::getInstance($model,'image3');
 
 
-            if($model->save()) {
 
             if(!empty($model->image)) {
             
@@ -201,7 +200,7 @@ class InfoController extends Controller
 
             }
 
-        }
+        
 
 
             return $this->redirect(['index']);
