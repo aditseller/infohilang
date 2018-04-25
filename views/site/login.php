@@ -11,7 +11,7 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <center><img width="30%" src="<?= Yii::$app->homeUrl ?>/public/img/login.png"></center>
+    <center><img width="30%" src="<?= Yii::$app->request->baseUrl ?>/public/img/login.png"></center>
 
     
 
