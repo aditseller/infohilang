@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+	<?= $this->render('metahead') ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -47,6 +48,7 @@ AppAsset::register($this);
                   ['label' => Yii::$app->user->identity->fullname,
                        'items' => [
                            ['label' => 'Account Setting', 'url' => ['/users/setting']],
+                           ['label' => 'My Info', 'url' => ['/info/myinfo']],
                            ['label' => 'Logout','url' => ['/site/logout'],'linkOptions' => ['data-method' => 'post']],
            ],
                   ],
@@ -69,6 +71,28 @@ AppAsset::register($this);
         
     </div>
 </footer>
+
+<?php 
+
+	if(@$_SERVER["HTTPS"] != "on") {
+   header("HTTP/1.1 301 Moved Permanently");
+   header("Location: https://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
+   exit();
+}
+
+?>
+
+<?php
+include 'lib/mobiledetect/Mobile_Detect.php';
+$detect = new Mobile_Detect();
+
+if ($detect->isMobile()) {
+	
+} else {
+    header('Location: https://www.instagram.com/infohilang/');
+    exit(0);
+}
+?>
 
 <?php $this->endBody() ?>
 </body>

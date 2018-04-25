@@ -35,11 +35,11 @@ class InfoController extends Controller
             //access_control
                'access' => [
                       'class' => AccessControl::className(),
-                           'only' => ['create','createlostinfo','createfoundinfo'],
+                           'only' => ['create','createlostinfo','createfoundinfo','myinfo'],
                                 'rules' => [
                                          [
                                                    'allow' => true,
-                                                           'actions' => ['create','createlostinfo','createfoundinfo'],
+                                                           'actions' => ['create','createlostinfo','createfoundinfo','myinfo'],
                                                                    'roles' => ['@'],
                                                         ],
                                                       ],
@@ -81,7 +81,20 @@ class InfoController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+	
+	//My Info Module
+	public function actionMyinfo()
+	{
+		
+		$searchModel = new InfoSearch();
+		$searchModel->created_by = Yii::$app->user->identity->username;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        return $this->render('myinfo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+	}
     //Choice
     public function actionCreate() {
 		
@@ -238,7 +251,7 @@ class InfoController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['myinfo']);
     }
 
     /**

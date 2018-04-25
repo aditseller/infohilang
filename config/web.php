@@ -58,6 +58,7 @@ $config = [
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 'u/<slug>' => 'users/slug',
                 'information/<slug>' => 'info/slug',
+                'myinfo' => 'info/myinfo',
             ],
         ],
         
